@@ -2,11 +2,12 @@ import unittest
 from src.customer import Customer
 from src.drink import Drink
 from src.pub import Pub
+from src.food import Food
 
 class TestCustomer(unittest.TestCase):
 
     def setUp(self):
-        self.drink = Drink("Peroni", 5, 2)
+        self.drink = Drink("Peroni", 5, 5)
         drinkList = [self.drink]
         self.pub = Pub("Craigs Pub", 50, drinkList)
         self.customer = Customer("Barry", 20, 40)
@@ -38,7 +39,7 @@ class TestCustomer(unittest.TestCase):
 
     def test_customer_drunkenness_increases(self):
         self.customer.buy_drink(self.drink, self.pub)
-        self.assertEqual(2, self.customer.drunkenness)
+        self.assertEqual(5, self.customer.drunkenness)
 
     def test_customer_drunkenness_increases_by9(self):
         self.vodka = Drink("Voddy", 8, 9)
@@ -53,8 +54,9 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual("Do one!", self.customer.buy_drink(self.vodka, self.pub))
         self.assertEqual(24, self.customer.drunkenness)
 
-    # def test_customer_is_too_drunk(self):
-    #     self.vodka = Drink("Voddy", 8, 9)
-    #     self.customer.buy_drink(self.vodka, self.pub)
-    #     self.customer.buy_drink(self.vodka, self.pub)
-    #     self.assertEqual("Do one!", self.customer.buy_drink(self.vodka, self.pub))
+    def test_customer_can_buy_food(self):
+        self.pie = Food("Pie", 3, 3)
+        self.customer.buy_drink(self.drink, self.pub)
+        self.customer.buy_food(self.pie)
+        self.assertEqual(12, self.customer.wallet)
+        self.assertEqual(2, self.customer.drunkenness)

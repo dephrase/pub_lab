@@ -13,6 +13,10 @@ class Customer:
             return "Enjoy!"
         else:
             return "Do one!"
+
+    def buy_food(self, food):
+        self.drunkenness -= food.rejuvenation_level
+        self.wallet -= food.price
         
 
         
